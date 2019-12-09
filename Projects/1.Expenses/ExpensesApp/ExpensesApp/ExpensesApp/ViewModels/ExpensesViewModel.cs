@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using ExpensesApp.Models;
+using ExpensesApp.Views;
+using Xamarin.Forms;
 
 namespace ExpensesApp.ViewModels
 {
@@ -11,8 +13,12 @@ namespace ExpensesApp.ViewModels
     {
         public ObservableCollection<Expense> Expenses { get; set; }
 
+        public Command AddExpenseCommand { get; set; }
+
         public ExpensesViewModel()
         {
+            Expenses = new ObservableCollection<Expense>();
+            AddExpenseCommand = new Command(AddExpense);
             GetExpenses();
         }
 
@@ -26,6 +32,11 @@ namespace ExpensesApp.ViewModels
             {
                 Expenses.Add(expense);
             }
+        }
+
+        public void AddExpense()
+        {
+            Application.Current.MainPage.Navigation.PushAsync(new NewExpensePage());
         }
     }
 }

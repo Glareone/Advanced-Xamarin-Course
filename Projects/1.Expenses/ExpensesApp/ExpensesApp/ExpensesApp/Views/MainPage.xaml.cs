@@ -8,6 +8,7 @@ namespace ExpensesApp.Views
     {
         public MainPage()
         {
+
             InitializeComponent();
         }
     }
