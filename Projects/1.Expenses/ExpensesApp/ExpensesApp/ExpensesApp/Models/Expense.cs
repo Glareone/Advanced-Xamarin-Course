@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SQLite;
 
 namespace ExpensesApp.Models
@@ -14,5 +15,25 @@ namespace ExpensesApp.Models
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public string Category { get; set; }
+
+        public static int InsertExpense(Expense expense)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                conn.CreateTable<Expense>();
+
+                return conn.Insert(expense);
+            }
+        }
+
+        public static IEnumerable<Expense> GetExpenses()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                conn.CreateTable<Expense>();
+
+                return conn.Table<Expense>().ToList();
+            }
+        }
     }
 }
