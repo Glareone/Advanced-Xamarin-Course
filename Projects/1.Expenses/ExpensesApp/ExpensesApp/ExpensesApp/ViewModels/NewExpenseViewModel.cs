@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ExpensesApp.Annotations;
@@ -64,10 +65,16 @@ namespace ExpensesApp.ViewModels
             }
         }
 
+        public ObservableCollection<string> Categories { get; set; }
+
         public Command SaveExpense { get; set; }
 
         public NewExpenseViewModel()
         {
+            ExpenseDate = DateTime.Today;
+            Categories = new ObservableCollection<string>();
+            GetCategories();
+
             SaveExpense = new Command(InsertExpense);
         }
 
@@ -100,6 +107,18 @@ namespace ExpensesApp.ViewModels
             {
                 Application.Current.MainPage.DisplayAlert("Error", "No items to be inserted", "Ok");
             }
+        }
+
+        private void GetCategories()
+        {
+            Categories.Clear();
+            Categories.Add("Housing");
+            Categories.Add("Debt");
+            Categories.Add("Health");
+            Categories.Add("Food");
+            Categories.Add("Personal");
+            Categories.Add("Travel");
+            Categories.Add("Other");
         }
     }
 }

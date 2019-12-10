@@ -19,8 +19,12 @@
             />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Margin="16">
-            <Label Text="Expenses Page" />
-        </StackLayout>
+        <ListView ItemsSource="{Binding Source={StaticResource viewModel}, Path=Expenses}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Category}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>
