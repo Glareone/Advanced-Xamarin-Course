@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ExpensesApp.Annotations;
 using ExpensesApp.Models;
+using Xamarin.Forms;
 
 namespace ExpensesApp.ViewModels
 {
@@ -63,9 +64,11 @@ namespace ExpensesApp.ViewModels
             }
         }
 
+        public Command SaveExpense { get; set; }
+
         public NewExpenseViewModel()
         {
-            
+            SaveExpense = new Command(InsertExpense);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -87,7 +90,16 @@ namespace ExpensesApp.ViewModels
                 Description = ExpenseDescription
             };
 
-            Expense.InsertExpense(expense);
+            var count = Expense.InsertExpense(expense);
+
+            if (count > 0)
+            {
+                Application.Current.MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+                Application.Current.MainPage.DisplayAlert("Error", "No items to be inserted", "Ok");
+            }
         }
     }
 }

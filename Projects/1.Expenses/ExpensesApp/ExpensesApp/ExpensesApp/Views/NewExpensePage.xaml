@@ -2,14 +2,29 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:vm="clr-namespace:ExpensesApp.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ExpensesApp.Views.NewExpensePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:NewExpenseViewModel x:Key="viewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding Source={StaticResource viewModel}, Path=SaveExpense}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Expense Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Margin="16" BindingContext="{Binding Source={StaticResource viewModel}}">
+            <StackLayout Margin="16">
+                <Entry Placeholder="Expense name" Text="{Binding ExpenseName, Mode=TwoWay}"/>
+                <Entry Placeholder="Amount" Keyboard="Numeric" Text="{Binding ExpenseAmount, Mode=TwoWay}"/>
+                <Entry Placeholder="Short Description" Text="{Binding ExpenseDescription, Mode=TwoWay}"/>
+                <DatePicker Date="{Binding ExpenseDate, Mode=TwoWay}"/>
+                <Picker SelectedItem="{Binding ExpenseCategory, Mode=TwoWay}"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

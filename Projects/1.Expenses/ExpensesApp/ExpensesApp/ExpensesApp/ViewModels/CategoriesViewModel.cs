@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 
 namespace ExpensesApp.ViewModels
 {
     public class CategoriesViewModel
     {
-        public ObservableCollection<string> Categories { get; set; }
-
         public CategoriesViewModel()
         {
             Categories = new ObservableCollection<string>();
             GetCategories();
         }
+
+        public ObservableCollection<string> Categories { get; set; }
 
         private void GetCategories()
         {

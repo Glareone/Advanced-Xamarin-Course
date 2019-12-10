@@ -20,11 +20,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Margin="16">
-            <Entry Placeholder="Expense name"/>
-            <Entry Placeholder="Amount" Keyboard="Numeric"/>
-            <Entry Placeholder="Short Description"/>
-            <DatePicker/>
-            <Picker/>
+            <Label Text="Expenses Page" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
