@@ -19,12 +19,12 @@
             />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Margin="16">
-            <Entry Placeholder="Expense name"/>
-            <Entry Placeholder="Amount" Keyboard="Numeric"/>
-            <Entry Placeholder="Short Description"/>
-            <DatePicker/>
-            <Picker/>
-        </StackLayout>
+        <ListView ItemsSource="{Binding Source={StaticResource viewModel}, Path=Expenses}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding Category}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>

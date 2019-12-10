@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SQLite;
 
 namespace ExpensesApp.Models
@@ -33,6 +34,26 @@ namespace ExpensesApp.Models
                 conn.CreateTable<Expense>();
 
                 return conn.Table<Expense>().ToList();
+            }
+        }
+
+        public static IEnumerable<Expense> GetExpenses(string category)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                conn.CreateTable<Expense>();
+
+                return conn.Table<Expense>().Where(e => e.Category == category).ToList();
+            }
+        }
+
+        public static float GetTotalExpensesAmount()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabasePath))
+            {
+                conn.CreateTable<Expense>();
+
+                return conn.Table<Expense>().ToList().Sum(e => e.Amount);
             }
         }
     }

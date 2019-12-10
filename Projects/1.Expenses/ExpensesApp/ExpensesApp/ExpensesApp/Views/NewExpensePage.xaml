@@ -1,15 +1,56 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:vm="clr-namespace:ExpensesApp.ViewModels"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ExpensesApp.Views.NewExpensePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:NewExpenseViewModel x:Key="viewModel" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Save" Command="{Binding Source={StaticResource viewModel}, Path=SaveExpense}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Expense Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BindingContext="{Binding Source={StaticResource viewModel}}">
+            <TableView x:Name="ExpenseTableView">
+                <TableRoot>
+                    <TableSection Title="New Expense">
+                        <EntryCell Label="Name:"
+                                   Placeholder="Expense Name"
+                                   Text="{Binding ExpenseName, Mode=TwoWay}" />
+                        <EntryCell Label="Amount:"
+                                   Placeholder="Expense Amount"
+                                   Keyboard="Numeric" Text="{Binding ExpenseAmount, Mode=TwoWay}" />
+                        <EntryCell Label="Description:"
+                                   Placeholder="Short Description"
+                                   Text="{Binding ExpenseDescription, Mode=TwoWay}" />
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Margin="16, 0">
+                                <Label Text="Date:" VerticalOptions="Center" />
+                                <DatePicker Date="{Binding ExpenseDate, Mode=TwoWay}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </ViewCell>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Margin="16, 0">
+                                <Label Text="Category:" VerticalOptions="Center" />
+                                <Picker SelectedItem="{Binding ExpenseCategory, Mode=TwoWay}"
+                                        ItemsSource="{Binding Categories}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
