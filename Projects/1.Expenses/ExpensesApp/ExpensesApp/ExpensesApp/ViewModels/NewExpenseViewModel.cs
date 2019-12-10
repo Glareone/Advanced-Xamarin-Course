@@ -66,6 +66,7 @@ namespace ExpensesApp.ViewModels
         }
 
         public ObservableCollection<string> Categories { get; set; }
+        public ObservableCollection<ExpenseStatus> ExpenseStatuses { get; set; }
 
         public Command SaveExpense { get; set; }
 
@@ -73,9 +74,10 @@ namespace ExpensesApp.ViewModels
         {
             ExpenseDate = DateTime.Today;
             Categories = new ObservableCollection<string>();
-            GetCategories();
-
+            ExpenseStatuses = new ObservableCollection<ExpenseStatus>();
             SaveExpense = new Command(InsertExpense);
+
+            GetCategories();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -88,13 +90,17 @@ namespace ExpensesApp.ViewModels
 
         public void InsertExpense()
         {
+            // this property to test how Statuses work using rough c# code approach.
+            var vm = this;
+
             var expense = new Expense
             {
                 Amount = ExpenseAmount,
                 Name = ExpenseName,
                 Category = ExpenseCategory,
                 Date = ExpenseDate,
-                Description = ExpenseDescription
+                Description = ExpenseDescription,
+                // and there you could assign "Statuses" (after creating this prop in model). their values are located inside vm.
             };
 
             var count = Expense.InsertExpense(expense);
@@ -119,6 +125,35 @@ namespace ExpensesApp.ViewModels
             Categories.Add("Personal");
             Categories.Add("Travel");
             Categories.Add("Other");
+        }
+
+        // Demo how to bind async data to form.
+        // TableView (in xaml) doesn't contain ItemSource property
+        public void GetExpenseStatus()
+        {
+            ExpenseStatuses.Clear();
+
+            // let's imagine that this code is pseudo-async.
+            ExpenseStatuses.Add(new ExpenseStatus
+            {
+                Name = "Random",
+                Status = true
+            });
+            ExpenseStatuses.Add(new ExpenseStatus
+            {
+                Name = "Random 2",
+                Status = true
+            });
+            ExpenseStatuses.Add(new ExpenseStatus
+            {
+                Name = "Random 3",
+                Status = false
+            });
+        }
+
+        public class ExpenseStatus {
+            public string Name { get; set; }
+            public bool Status { get; set; }
         }
     }
 }

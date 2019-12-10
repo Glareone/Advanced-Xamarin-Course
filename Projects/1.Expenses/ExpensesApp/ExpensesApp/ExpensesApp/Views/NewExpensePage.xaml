@@ -19,7 +19,7 @@
 
     <ContentPage.Content>
         <StackLayout BindingContext="{Binding Source={StaticResource viewModel}}">
-            <TableView>
+            <TableView x:Name="ExpenseTableView">
                 <TableRoot>
                     <TableSection Title="New Expense">
                         <EntryCell Label="Name:"
