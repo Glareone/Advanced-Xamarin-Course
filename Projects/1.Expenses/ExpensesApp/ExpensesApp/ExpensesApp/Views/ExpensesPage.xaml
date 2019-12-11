@@ -22,7 +22,10 @@
         <ListView ItemsSource="{Binding Source={StaticResource viewModel}, Path=Expenses}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Category}"/>
+                    <TextCell 
+                        StyleId="detail-disclosure-button"
+                        Text="{Binding Name}"
+                        Detail="{Binding Category}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
