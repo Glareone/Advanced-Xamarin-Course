@@ -4,6 +4,7 @@ using Xamarin.Forms.Platform.Android;
 using ExpensesApp.Droid.CustomRenderers;
 
 // Necessary attribute
+// you could declare all assemblies in one place or for every class itself.
 [assembly: ExportRenderer(typeof(ProgressBar), typeof(CustomProgressBarRenderer))]
 namespace ExpensesApp.Droid.CustomRenderers
 {

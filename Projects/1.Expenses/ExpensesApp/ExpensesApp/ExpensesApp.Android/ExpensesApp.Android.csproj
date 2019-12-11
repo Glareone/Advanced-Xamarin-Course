@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="CustomRenderers\CustomProgressBarRenderer.cs" />
     <Compile Include="CustomRenderers\CustomTextCellRenderer.cs" />
+    <Compile Include="CustomRenderers\CustomViewCellRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

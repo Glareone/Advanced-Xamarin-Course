@@ -1,14 +1,18 @@
 ﻿using Android.Content;
 using Android.Views;
-using ExpensesApp.iOS.CustomRenderers;
+using ExpensesApp.Droid.CustomRenderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using View = Android.Views.View;
 
 // Necessary attribute
+// you could declare all assemblies in one place or for every class itself. (like i do here. Then there is no reason to declare them in other places)
 [assembly: ExportRenderer(typeof(TextCell), typeof(CustomTextCellRenderer))]
+[assembly: ExportRenderer(typeof(ProgressBar), typeof(CustomProgressBarRenderer))]
+[assembly: ExportRenderer(typeof(ViewCell), typeof(CustomViewCellRenderer))]
 
-namespace ExpensesApp.iOS.CustomRenderers
+
+namespace ExpensesApp.Droid.CustomRenderers
 {
     // Customize Text cells from ExpensesPage (instead of Ios where we added a new control to right side of each cell - here we only changed a color)
     // for demo purposes, cell contains a lot of SetXX abilities
