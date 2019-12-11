@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-
 using Foundation;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace ExpensesApp.iOS
 {
@@ -12,7 +11,7 @@ namespace ExpensesApp.iOS
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public class AppDelegate : FormsApplicationDelegate
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 
@@ -23,11 +22,17 @@ namespace ExpensesApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Forms.Init();
 
             var dbName = "expenses_db.db3";
-            var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "..", "Library");
+            var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "..",
+                "Library");
             var fullPath = Path.Combine(folderPath, dbName);
+
+            // Another approach to use DI registration. Other one - is use [assembly: Dependency attribute]
+            //DependencyService.Register<IShare, Share>();
+            // OR
+            //DependencyService.Register<Share>();
 
             LoadApplication(new App(fullPath));
 
