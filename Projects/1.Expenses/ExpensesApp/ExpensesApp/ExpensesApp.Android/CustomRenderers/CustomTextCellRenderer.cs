@@ -35,7 +35,7 @@ namespace ExpensesApp.Droid.CustomRenderers
                     cell.SetBackgroundColor(Android.Graphics.Color.Beige);
                     break;
                 case "detail-disclosure-button":
-                    cell.SetBackgroundColor(Android.Graphics.Color.Chartreuse);
+                    cell.SetBackgroundColor(Android.Graphics.Color.LightGray);
                     break;
                 case "disclosure":
                 default:

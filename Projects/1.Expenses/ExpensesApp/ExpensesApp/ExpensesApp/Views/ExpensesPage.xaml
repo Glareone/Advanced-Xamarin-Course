@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:vm="clr-namespace:ExpensesApp.ViewModels"
+             xmlns:behaviors="clr-namespace:ExpensesApp.Behaviors"
              x:Class="ExpensesApp.Views.ExpensesPage">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -20,6 +21,9 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView ItemsSource="{Binding Source={StaticResource viewModel}, Path=Expenses}">
+            <ListView.Behaviors>
+                <behaviors:ListViewBehavior />
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell 
