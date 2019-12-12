@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:vm="clr-namespace:ExpensesApp.ViewModels"
+             xmlns:effect="clr-namespace:ExpensesApp.Effects"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="ExpensesApp.Views.NewExpensePage">
@@ -36,7 +37,11 @@
                                 <Label Text="Date:" VerticalOptions="Center" />
                                 <DatePicker Date="{Binding ExpenseDate, Mode=TwoWay}"
                                             VerticalOptions="Center"
-                                            HorizontalOptions="FillAndExpand" />
+                                            HorizontalOptions="FillAndExpand">
+                                    <DatePicker.Effects>
+                                        <effect:SelectedEffect />
+                                    </DatePicker.Effects>
+                                </DatePicker>
                             </StackLayout>
                         </ViewCell>
                         <ViewCell>
@@ -45,7 +50,11 @@
                                 <Picker SelectedItem="{Binding ExpenseCategory, Mode=TwoWay}"
                                         ItemsSource="{Binding Categories}"
                                         VerticalOptions="Center"
-                                        HorizontalOptions="FillAndExpand" />
+                                        HorizontalOptions="FillAndExpand">
+                                    <Picker.Effects>
+                                        <effect:SelectedEffect />
+                                    </Picker.Effects>
+                                </Picker>
                             </StackLayout>
                         </ViewCell>
                     </TableSection>
