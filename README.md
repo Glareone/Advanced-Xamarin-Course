@@ -40,3 +40,10 @@ use:
 
 demo: some examples on ExpensesPage + ListViewBehavior. Added onClick event to move us to details page.
 Other listViews on another pages dont have such action.
+
+### Effects:
+
+to Style some components (with some types) without using CustomRenderer or StaticResource Styles.
+
+Demo: SelectedEffect.cs and NewExpensesPage (<DatePicker.Effects>)
+<DatePicker.Effects></DatePicker.Effects> is a list of effects. Several effects could be assigned.
