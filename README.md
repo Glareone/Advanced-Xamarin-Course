@@ -43,7 +43,8 @@ Other listViews on another pages dont have such action.
 
 ### Effects:
 
-to Style some components (with some types) without using CustomRenderer or StaticResource Styles.
+to make some styles to selected components (with has different types) without using CustomRenderer or StaticResource Styles.
+I would like to emphasize the next: One Effect could work for different type of controls.
 
-Demo: SelectedEffect.cs and NewExpensesPage (<DatePicker.Effects>)
+Demo: SelectedEffect.cs files and NewExpensesPage (<DatePicker.Effects> + its namespace at the top of the file)
 <DatePicker.Effects></DatePicker.Effects> is a list of effects. Several effects could be assigned.
