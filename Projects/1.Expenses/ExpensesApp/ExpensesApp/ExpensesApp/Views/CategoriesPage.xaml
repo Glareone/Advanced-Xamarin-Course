@@ -10,6 +10,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Export" Command="{Binding Source={StaticResource viewModel}, Path=ExportCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <ListView ItemsSource="{Binding Source={StaticResource viewModel}, Path=CategoryExpenses}">
             <ListView.ItemTemplate>

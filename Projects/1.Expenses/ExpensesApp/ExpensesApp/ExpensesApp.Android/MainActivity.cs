@@ -1,17 +1,18 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Android.Runtime;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
 using Environment = System.Environment;
+using Platform = Xamarin.Essentials.Platform;
 
 namespace ExpensesApp.Droid
 {
-    [Activity(Label = "ExpensesApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    [Activity(Label = "ExpensesApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -20,18 +21,25 @@ namespace ExpensesApp.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Platform.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
 
             var dbName = "expenses_db.db3";
             var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             var fullPath = Path.Combine(folderPath, dbName);
 
+            // Another approach to use DI registration. Other one - is use [assembly: Dependency attribute]
+            //DependencyService.Register<IShare, Share>();
+            // OR
+            //DependencyService.Register<Share>();
+
             LoadApplication(new App(fullPath));
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
+            [GeneratedEnum] Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
