@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using ExpensesApp.Interfaces;
 using ExpensesApp.Models;
+using PCLStorage;
 using Xamarin.Forms;
 
 namespace ExpensesApp.ViewModels
@@ -12,10 +14,15 @@ namespace ExpensesApp.ViewModels
 
         public ObservableCollection<CategoryExpense> CategoryExpenses { get; set; }
 
+        public Command ExportCommand { get; set; }
+
         public CategoriesViewModel()
         {
             Categories = new ObservableCollection<string>();
             CategoryExpenses = new ObservableCollection<CategoryExpense>();
+
+            ExportCommand = new Command(ShareReport);
+
             GetCategories();
             GetExpensesPerCategory();
         }
@@ -46,10 +53,25 @@ namespace ExpensesApp.ViewModels
             public float ExpensesPercentage { get; set; }
         }
 
-        public void ShareReport()
+        // Write reports to the file with platform specific logic located in Share classes inside droid and iOS projects
+        public async void ShareReport()
         {
+            IFileSystem fileSystem = FileSystem.Current;
+            IFolder rootFolder = fileSystem.LocalStorage;
+            IFolder reportsFolder = await rootFolder.CreateFolderAsync("reports", CreationCollisionOption.OpenIfExists);
+
+            var txtFile = await reportsFolder.CreateFileAsync("reports.txt", CreationCollisionOption.ReplaceExisting);
+
+            using (StreamWriter sw = new StreamWriter(txtFile.Path))
+            {
+                foreach (var categoryExpense in CategoryExpenses)
+                {
+                    sw.WriteLine($"{categoryExpense.Category} - {categoryExpense.ExpensesPercentage}");
+                }
+            }
+
             var shareDependency = DependencyService.Get<IShare>();
-            shareDependency.Show("", "", "");
+            await shareDependency.Show("Expense Reports", "Here is your expense report", txtFile.Path);
         }
 
         private void GetCategories()
